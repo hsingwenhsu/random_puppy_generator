@@ -24,4 +24,4 @@ for i in range(dog_num):
 
 ## Demo
 - Result of the program:
-![alt text](demo.png)
+![alt text](demo.png){ width: 400px; }
