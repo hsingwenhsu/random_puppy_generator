@@ -24,4 +24,4 @@ for i in range(dog_num):
 
 ## Demo
 - Result of the program:
-![test](demo.png){:height="24px" width="48px"}
+![test](demo.png)
