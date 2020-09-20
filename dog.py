@@ -4,8 +4,8 @@ import cv2
 import numpy as np
 from random import randrange
 
-comp_path = '/Users/vivi/Documents/myweb/gen_photo/components/'
-output_path = '/Users/vivi/Documents/myweb/gen_photo/doggy/'
+comp_path = 'components/'
+output_path = 'doggie/'
 
 def paste_mouth(dog, mouth): #paste the mouth
     mouth = cv2.bitwise_not(mouth)
@@ -92,6 +92,21 @@ def get_puppy(dog_list, mouth, color_list):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+def gen_all_puppies(dog_list, mouth, color_list):
+    for i in range(dog_num):
+        dog_list[i] = paste_mouth(dog_list[i], mouth)
+    
+    for i in range(dog_num): #4
+        for j in range(3):#3
+            colored = color(dog_list[i], color_list, j)
+            
+            for k in range(5):#4
+                print(i, j, k)
+                todraweye = colored[:, :].copy()
+                todraweye = draw_eye(todraweye, k)
+                name = str(i)+'_'+str(j)+'_'+str(k)+'.png'
+                cv2.imwrite('doggie/'+name, todraweye)
+
 #prepare dogs
 dog_list = []
 img = cv2.imread(comp_path+'dog1.png')
@@ -117,22 +132,10 @@ print(color_list[0])
 print(color_list[1])
 print(color_list[2])
 
-#mouth
-mouth = cv2.imread(comp_path+'mouth.png')
-#get_puppy(dog_list, mouth, color_list)
+mouth = cv2.imread(comp_path+'mouth.png')# mouth
 
-#paste mouth onto dogs
-for i in range(dog_num):
-    dog_list[i] = paste_mouth(dog_list[i], mouth)
-    
-for i in range(dog_num): #4
-    for j in range(3):#3
-        colored = color(dog_list[i], color_list, j)
-        
-        for k in range(5):#4
-            print(i, j, k)
-            todraweye = colored[:, :].copy()
-            todraweye = draw_eye(todraweye, k)
-            name = str(i)+'_'+str(j)+'_'+str(k)+'.png'
-            print(name)
-            cv2.imwrite('/Users/vivi/Documents/myweb/gen_photo/doggie/'+name, todraweye)
+if __name__=='__main__':
+    get_puppy(dog_list, mouth, color_list)
+    #gen_all_puppy(dog_list, mouth, color_list)
+
+
